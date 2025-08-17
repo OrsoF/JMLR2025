@@ -1,0 +1,15 @@
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|cccc}
+        Standard    & Rooms                         & Mountain                  & Taxi      & Racetrack  \\
+        $\statedim$ & 250k                          & 100k                      & 250k      & 250k       \\
+        $K$         & 6.6k                          & 4.3k                      & 7k        & 12k        \\ \toprule
+        Real-world  & Tandem                        & Hydro                     & Inventory & Impatience \\
+        $\statedim$ & 50k                           & 16k                       & 10k       & 1000       \\
+        $K$         & 16k                           & 2.5k                      & 10k       & 950        \\ \toprule
+        Random      & \multicolumn{2}{c}{Garnet 85} & \multicolumn{2}{c}{Block}                          \\
+        $\statedim$ & \multicolumn{2}{c}{500}       & \multicolumn{2}{c}{500}                            \\
+        $K$         & \multicolumn{2}{c}{490}       & \multicolumn{2}{c}{420}
+    \end{tabular}
+    \caption{Final state abstraction size along model. $\gamma= 0.9999$, $\varepsilon = 10^{-3}$.}
+\end{table}\label{tab:abs_size}

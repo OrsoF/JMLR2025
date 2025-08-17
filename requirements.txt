@@ -1,0 +1,12 @@
+git+https://github.com/OrsoF/pymdptoolbox_update.git
+gurobipy
+ipython
+openpyxl
+tqdm
+mazelib
+matplotlib
+seaborn
+numpy
+scipy
+reportlab
+pypdf
