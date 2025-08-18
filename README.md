@@ -55,5 +55,6 @@ The `models/` directory contains various MDP environments, such as:
 
 To clean all generated files and results, use the reset function in [`utils/data_management.py`](utils/data_management.py):
 
-```python reset.py
+```sh
+python reset.py
 ```
