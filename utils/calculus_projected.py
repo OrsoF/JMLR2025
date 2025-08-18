@@ -18,13 +18,19 @@ def projected_optimal_bellman_operator(
     """
     Returns w @ max_a(agg_R + gamma * agg_T @ agg_V)
     """
+
     contracted_value = contracted_value.squeeze()
     contracted_q_value = np.empty((model.state_dim, model.action_dim))
 
     for aa in range(model.action_dim):
-        contracted_q_value[:, aa] = aggregated_reward[
-            :, aa
-        ] + discount * aggregated_transition[aa].dot(contracted_value)
+        if contracted_value.shape == ():
+            contracted_q_value[:, aa] = aggregated_reward[:, aa] + (
+                discount * contracted_value * aggregated_transition[aa]
+            ).reshape((model.state_dim,))
+        else:
+            contracted_q_value[:, aa] = aggregated_reward[
+                :, aa
+            ] + discount * aggregated_transition[aa].dot(contracted_value)
 
     return weights.dot(contracted_q_value.max(axis=1))
 

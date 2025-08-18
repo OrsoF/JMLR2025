@@ -172,6 +172,15 @@ class Solver:
                     self.proj_bellman_max_steps,
                 )
 
+            contracted_value, pbr_value = apply_ppbo_until_var_small(
+                self.discount,
+                self.partition.aggregate_transition_policy,
+                self.partition.aggregate_reward_policy,
+                epsilon_pbr,
+                contracted_value,
+                self.proj_bellman_max_steps,
+            )
+
             # Compute span
             maximum_span, bellman_of_value = self._get_maximum_span_and_bellman_value(
                 contracted_value, transition_policy, reward_policy

@@ -93,14 +93,14 @@ class Solver:
                 self.partition._compute_weights_phi()
                 self.partition.compute_agg_trans_reward_v()
 
-                pbr_value = projected_optimal_bellman_operator_residual(
-                    self.model,
-                    self.discount,
-                    contracted_value,
-                    self.partition.aggregate_transition_matrix,
-                    self.partition.aggregate_reward_matrix,
-                    self.partition.weights,
-                )
+            pbr_value = projected_optimal_bellman_operator_residual(
+                self.model,
+                self.discount,
+                contracted_value,
+                self.partition.aggregate_transition_matrix,
+                self.partition.aggregate_reward_matrix,
+                self.partition.weights,
+            )
 
             if maximum_span < self.epsilon_span and pbr_value < self.epsilon_pbr:
                 self.runtime = time() - start_time

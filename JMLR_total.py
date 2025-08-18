@@ -1,4 +1,3 @@
-from panel import state
 from utils.data_management import solve
 
 models = [
@@ -25,7 +24,7 @@ for model_name, state_dim in models:
         f"Model {model_name}, State Dimension: {state_dim}, Precision: {precision}, Repeat: {repeat}"
     )
     for solver_name in solvers:
-        if state_dim > 15000 and 'pim' in solver_name:
+        if state_dim > 100000 and 'pim' in solver_name:
             continue
         solve(
             model_name, solver_name, state_dim, action_dim, discount, precision, repeat

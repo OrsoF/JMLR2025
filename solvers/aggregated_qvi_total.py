@@ -117,14 +117,14 @@ class Solver(GenericSolver):
 
                 self.partition._compute_weights_phi()
                 self.partition.compute_agg_trans_reward_q()
-                projected_q_bellman_value = projected_optimal_q_bellman_operator(
-                    self.model,
-                    self.discount,
-                    self.contracted_q_value,
-                    self.partition.aggregate_transition_matrix,
-                    self.partition.aggregate_reward_matrix,
-                )
-                pbr_value = norminf(projected_q_bellman_value - self.contracted_q_value)
+            projected_q_bellman_value = projected_optimal_q_bellman_operator(
+                self.model,
+                self.discount,
+                self.contracted_q_value,
+                self.partition.aggregate_transition_matrix,
+                self.partition.aggregate_reward_matrix,
+            )
+            pbr_value = norminf(projected_q_bellman_value - self.contracted_q_value)
 
             if maximum_span < self.epsilon_span and pbr_value < self.epsilon_pbr:
                 self.runtime = time() - start_time
