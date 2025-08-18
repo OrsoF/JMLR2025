@@ -1,13 +1,8 @@
 import os
-import platform
 import shutil
-import gurobipy as grb
 from importlib.util import spec_from_file_location, module_from_spec
 import time
-import matplotlib.pyplot as plt
-from gurobipy import GRB, Model
 import numpy as np
-from tqdm import trange
 
 from utils.generic_model import GenericModel
 
@@ -62,28 +57,6 @@ def reset():
             shutil.rmtree(os.path.join(os.getcwd(), folder))
         except FileNotFoundError:
             pass
-
-
-def gurobi_license() -> bool:
-    """
-    To check if the Gurobi license exists or not.
-    Output : True if license, False otherwise.
-    """
-    gurobi_log_string = "gurobi.log"
-    grb.Env(gurobi_log_string)
-    f = open(gurobi_log_string, "r")
-    log = f.read()
-    f.close()
-    os.remove(os.path.join(os.getcwd(), gurobi_log_string))
-    return "Restricted" not in log
-
-
-def linux() -> bool:
-    """
-    To check if the system runs on Linux.
-    Output : True if Linux, False otherwise
-    """
-    return platform.system() == "Linux"
 
 
 def remove_unused_solver_files(solver_name_list: list) -> list:
@@ -148,24 +121,6 @@ def write_text(filename: str, text: str, show: bool = False):
         if file.tell() > 0:
             file.write("\n")
         file.write(text)
-
-
-def plot_optimal_value(model_name: str, state_dim: int, discount: float = 0.99):
-    _, solver = solve(model_name, "marmote_vi", state_dim, 10, discount, 1e-6)
-    optimal_value = solver.value
-    plt.plot(optimal_value, label="Optimal value of {} model".format(model_name))
-    plt.xlabel("State index")
-    plt.legend()
-    plt.show()
-
-
-def gurobi_model_creation() -> Model:
-    model = Model("MDP")
-    model.setParam("OutputFlag", 0)
-    model.setParam(GRB.Param.Threads, 1)
-    model.setParam("LogToConsole", 0)
-    model.setParam("MemLimit", 16)
-    return model
 
 
 class ToyModel(GenericModel):

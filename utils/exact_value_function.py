@@ -1,10 +1,6 @@
-from mdptoolbox.mdp import (
-    RelativeValueIteration,
-    ValueIteration,
-)
 from utils.generic_model import GenericModel
 from utils.pickle import pickle_load, pickle_save
-from typing import Optional, Callable
+from typing import Callable
 import numpy as np
 import os
 
@@ -31,53 +27,6 @@ def build_value_function_name(
 
     assert method in all_method_set, "Method {} not recognized.".format(method)
     return "{}_{}_{}".format(method, discount, model.name)
-
-
-def compute_exact_value(
-    model: GenericModel,
-    method: str,
-    discount: Optional[float] = None,
-    warning: bool = True,
-    epsilon_exact_value: float = 1e-6,
-    max_iter_exact_value: int = int(1e8),
-    skip_check: bool = True,
-) -> np.ndarray:
-    """
-    Given a model, we compute the exact value function
-    up to a given precision.
-    """
-    assert (
-        not warning
-    ), "The function should not be used in itself, use get_exact_value function instead."
-
-    if method == av_str:
-        solver = RelativeValueIteration(
-            transitions=model.transition_matrix,
-            reward=model.reward_matrix,
-            epsilon=epsilon_exact_value,
-            max_iter=max_iter_exact_value,
-            skip_check=skip_check,
-        )
-    elif method == dis_str:
-        solver = ValueIteration(
-            transitions=model.transition_matrix,
-            reward=model.reward_matrix,
-            discount=discount,
-            epsilon=epsilon_exact_value,
-            max_iter=max_iter_exact_value,
-            skip_check=skip_check,
-        )
-    elif method == tot_str:
-        solver = ValueIteration(
-            transitions=model.transition_matrix,
-            reward=model.reward_matrix,
-            discount=1.0,
-            epsilon=epsilon_exact_value,
-            max_iter=max_iter_exact_value,
-            skip_check=skip_check,
-        )
-    solver.run()
-    return np.array(solver.V)
 
 
 def check_model_method_discount(model: GenericModel, method: str, discount: float):

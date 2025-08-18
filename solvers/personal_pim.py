@@ -1,10 +1,7 @@
-from gurobipy import Model
 import numpy as np
 from time import time
 from utils.generic_model import GenericModel, NUMPY, SPARSE
 from scipy.sparse import lil_matrix
-from utils.calculus import bellman_residual_policy, optimal_bellman_residual
-
 
 class Solver:
     def __init__(

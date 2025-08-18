@@ -1,10 +1,7 @@
-from calendar import c
-from gurobipy import max_
 import numpy as np
 from utils.generic_model import GenericModel, NUMPY, SPARSE
 from typing import List, Tuple, Optional
 from utils.calculus import norminf
-from scipy.sparse import csr_matrix, csr_array
 
 seed = 0
 rnd_gen = np.random.default_rng(seed)

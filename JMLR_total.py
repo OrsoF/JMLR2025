@@ -2,9 +2,9 @@ from panel import state
 from utils.data_management import solve
 
 models = [
-    ("rooms", 250000),
-    ("mountain", 100000),
-    ("taxi", 250000),
+    ("rooms_total", 250000),
+    ("mountain_total", 100000),
+    ("taxi_total", 250000),
 ]
 
 solvers = [
