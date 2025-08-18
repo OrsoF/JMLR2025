@@ -111,11 +111,12 @@ def solve(
     solver = import_solver_from_file(solver_name)
     solver.__init__(model, discount, precision)
     runtimes = []
-    repeat += 1
     if repeat == 1:
         solver.run()
         # print("Runtime: {:.3f} seconds".format(solver.runtime))
+        print(f"{solver_name} : {np.round(solver.runtime, 1)} seconds")
     else:
+        repeat += 1
         for run in range(repeat):
             solver.run()
             if run == 0:
@@ -126,7 +127,7 @@ def solve(
         mean = np.round(np.mean(runtimes), 1)
         std = np.round(np.std(runtimes), 1)
 
-        print(f"{mean} $\pm$ {std}")
+        print(f"{solver_name} : {mean} +- {std} seconds")
     return model, solver
 
 

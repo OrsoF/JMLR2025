@@ -46,15 +46,13 @@ def getsize(obj):
 print(f"Model {args.model}...")
 
 for solver in [
-    # "aggregated_vi",
-    # "aggregated_qvi",
-    # "personal_vi",
+    "aggregated_vi",
+    "aggregated_qvi",
+    "personal_vi",
     "aggregated_pim",
-    # "personal_pim",
-    # "bertsekas_pi",
+    "personal_pim",
+    "bertsekas_pi",
 ]:
-    if 'agg' not in solver:
-        continue
     print("Solver:", solver)
     args.solver = solver
 
@@ -79,6 +77,3 @@ for solver in [
     )
     # print(f"Runtime: {solver.runtime}")
     # print(solver.value)
-
-    if hasattr(solver, "partition"):
-        print(f"Regions: {solver.partition._number_of_regions()} / {model.state_dim}")
